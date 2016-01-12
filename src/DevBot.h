@@ -29,7 +29,7 @@ class DevBot: public IterativeRobot
 	// None yet!
 	
 	// Assorted In's and Out's
-	Gyro gyro;
+	AnalogGyro gyro;
 	BuiltInAccelerometer accelerometer;
 	Compressor compressor;
 	RobotDrive robotDrive;
