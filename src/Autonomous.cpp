@@ -6,7 +6,7 @@
 
 void DevBot::AutonomousInit() {
 	// Setup
-	robotDrive.SetSafetyEnabled( false );
+	robotDrive.SetSafetyEnabled(false);
 	gyro.Reset();
 	Timer timer;
 
@@ -16,18 +16,18 @@ void DevBot::AutonomousInit() {
 
 	// Drive straight for 2 seconds
 	while ( timer.Get() < 2 ) {
-		robotDrive.MecanumDrive_Cartesian( 0, -0.20, gyro.GetAngle() * 0.1 );
+		robotDrive.MecanumDrive_Cartesian(0, -0.20, gyro.GetAngle() * 0.1);
 		UpdateMotors();
-		Wait( 0.005 );
+		Wait(0.005);
 	}
 
 	// Stop
-	robotDrive.MecanumDrive_Cartesian( 0, 0, 0 );
+	robotDrive.MecanumDrive_Cartesian(0, 0, 0);
 	UpdateMotors();
 }
 
 void DevBot::AutonomousPeriodic() {
-	Wait( 0.005 );
+	Wait(0.005);
 }
 
 void DevBot::Turn( float absSpeed, float targetAngle ) {
@@ -41,23 +41,24 @@ void DevBot::Turn( float absSpeed, float targetAngle ) {
 	do {
 		// Find the offsets for the rest of the math
 		offset = gyro.GetAngle() - targetAngle;
-		absOffset = std::abs( offset );
+		absOffset = std::abs(offset);
 		
 		// Calculate output speed
-		if( offset > 0 )
+		if(offset > 0)
 			speed = absSpeed;
 		else
-			speed = -1*absSpeed;
+			speed = -1 * absSpeed;
 
 		// Turn
-		robotDrive.MecanumDrive_Cartesian( 0, 0, speed );
+		robotDrive.MecanumDrive_Cartesian(0, 0, speed);
 
 		// Keep CPU from catching fire and network from exploding in a fireball of packets.
-		Wait( 0.005 );
+		Wait(0.005);
+
 	} while( absOffset > 1 ); // Repeat until target is reached.
 
 	// Leave everything as we found it
-	robotDrive.MecanumDrive_Cartesian( 0, 0, 0 );
+	robotDrive.MecanumDrive_Cartesian(0, 0, 0);
 }
 
 void DevBot::Backward( float Speed, float Time ) {
@@ -71,12 +72,12 @@ void DevBot::Backward( float Speed, float Time ) {
 
 	// Move straight, changing angle to adjust for drift
 	while ( timer.Get() <= Time ) {
-		robotDrive.MecanumDrive_Cartesian( 0, -Speed, gyro.GetAngle() * 0.1 );
-		Wait( 0.005 );
+		robotDrive.MecanumDrive_Cartesian(0, -Speed, gyro.GetAngle() * 0.1 );
+		Wait(0.005);
 	}
 	
 	// Leave everything as we found it
-	robotDrive.MecanumDrive_Cartesian( 0, 0, 0 );
+	robotDrive.MecanumDrive_Cartesian(0, 0, 0);
 	timer.Stop();
 }
 
@@ -91,11 +92,11 @@ void DevBot::Forward( float Speed, float Time ) {
 
 	// Move straight, changing angle to adjust for drift
 	while ( timer.Get() <= Time ) {
-		robotDrive.MecanumDrive_Cartesian( 0, Speed, -gyro.GetAngle() * 0.1 );
-		Wait( 0.005 );
+		robotDrive.MecanumDrive_Cartesian(0, Speed, -gyro.GetAngle() * 0.1 );
+		Wait(0.005);
 	}
 	
 	// Leave everything as we found it
-	robotDrive.MecanumDrive_Cartesian( 0, 0, 0 );
+	robotDrive.MecanumDrive_Cartesian(0, 0, 0);
 	timer.Stop();
 }

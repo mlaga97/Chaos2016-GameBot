@@ -4,36 +4,36 @@
 
 DevBot::DevBot():
 	// Actual Motor Controllers
-	frontRight( 1 ),
-	frontLeft( 2 ),
-	rearLeft( 3 ),
-	rearRight( 4 ),
+	frontRight(1),
+	frontLeft(2),
+	rearLeft(3),
+	rearRight(4),
 
 	// Fake Motor Controllers
-	PWMfr( 0 ),
-	PWMfl( 1 ),
-	PWMrl( 2 ),
-	PWMrr( 3 ),
+	PWMfr(0),
+	PWMfl(1),
+	PWMrl(2),
+	PWMrr(3),
 	
 	// Controllers
-	driver( 0 ),
-	copilot( 1 ),
+	driver(0),
+	copilot(1),
 	
 	// Pseudo-Subsystems
 	// None yet!
 	
 	// Assorted In's and Out's
-	gyro( 0 ),
+	gyro(0),
 	accelerometer(),
 	compressor(),
-	robotDrive( PWMfl, PWMrl, PWMfr, PWMrr )
+	robotDrive(PWMfl, PWMrl, PWMfr, PWMrr)
 {
 	// Mecanum Boilerplate
 	robotDrive.SetInvertedMotor( RobotDrive::kFrontLeftMotor, true );
 	robotDrive.SetInvertedMotor( RobotDrive::kRearLeftMotor, true );
 	
 	// Other Assorted Setup
-	robotDrive.SetExpiration( 0.3 );
+	robotDrive.SetExpiration(0.3);
 	compressor.Start();
 }
 
