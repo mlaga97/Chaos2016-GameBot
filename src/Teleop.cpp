@@ -15,10 +15,7 @@ void DevBot::TeleopPeriodic() {
 	);
 
 	// Set real motor values based off of the fake ones
-	frontRight.Set(PWMfr.Get());
-	frontLeft.Set(PWMfl.Get());
-	rearLeft.Set(PWMrl.Get());
-	rearRight.Set(PWMrr.Get());
+	UpdateMotors();
 
 	Wait(0.005); // Give the CPU some time to breathe so it doesn't explode.
 }
