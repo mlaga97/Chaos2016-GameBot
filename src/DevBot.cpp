@@ -4,10 +4,10 @@
 
 DevBot::DevBot():
 	// Actual Motor Controllers
-	frontRight(1),
-	frontLeft(2),
-	rearLeft(3),
-	rearRight(4),
+	frontRight(7),
+	frontLeft(8),
+	rearLeft(9),
+	rearRight(10),
 
 	// Fake Motor Controllers
 	PWMfr(0),
