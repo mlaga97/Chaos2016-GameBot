@@ -8,10 +8,10 @@ void DevBot::TeleopInit() {
 
 void DevBot::TeleopPeriodic() {
 	// Drive
-	robotDrive.MecanumDrive_Cartesian(
-		-0.5*driver.GetRawAxis(0),		// Lateral movement
-		-0.5*driver.GetRawAxis(1),		// Forward movement
-		-0.5*driver.GetRawAxis(4)		// Rotational movement
+	robotDrive.ArcadeDrive
+	(
+		-0.5*driver.GetRawAxis(4),		// Lateral movement
+		-0.5*driver.GetRawAxis(1)		// Forward movement
 	);
 
 	// Set real motor values based off of the fake ones
