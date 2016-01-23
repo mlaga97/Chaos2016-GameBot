@@ -10,8 +10,8 @@ void DevBot::TeleopPeriodic() {
 	// Drive
 	robotDrive.ArcadeDrive
 	(
-		-0.5*driver.GetRawAxis(4),		// Lateral movement
-		-0.5*driver.GetRawAxis(1)		// Forward movement
+		-0.5*driver.GetRawAxis(1),		// Forward movement
+		-0.5*driver.GetRawAxis(4)		// Rotational movement
 	);
 
 	// Set real motor values based off of the fake ones
