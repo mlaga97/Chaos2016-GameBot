@@ -8,8 +8,8 @@ void DevBot::TeleopInit() {
 
 void DevBot::TeleopPeriodic() {
 	// Drive
-	robotDrive.MecanumDrive_Cartesian(
-		-0.5*driver.GetRawAxis(0),		// Lateral movement
+	robotDrive.ArcadeDrive
+	(
 		-0.5*driver.GetRawAxis(1),		// Forward movement
 		-0.5*driver.GetRawAxis(4)		// Rotational movement
 	);
