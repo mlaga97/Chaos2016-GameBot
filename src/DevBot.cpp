@@ -16,8 +16,8 @@ DevBot::DevBot():
 	PWMrr(3),
 	
 	// Controllers
-	driver(0),
-	copilot(1),
+	driver(5),
+	copilot(4),
 	
 	// Pseudo-Subsystems
 	// None yet!
