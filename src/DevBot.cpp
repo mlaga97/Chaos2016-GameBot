@@ -4,16 +4,17 @@
 
 DevBot::DevBot():
 	// Actual Motor Controllers
-	frontRight(7),
-	frontLeft(8),
+	frontLeft(7),
+	middleLeft(8),
 	rearLeft(9),
-	rearRight(10),
+
+	frontRight(10),
+	middleRight(11),
+	rearRight(12),
 
 	// Fake Motor Controllers
-	PWMfr(0),
-	PWMfl(1),
-	PWMrl(2),
-	PWMrr(3),
+	PWMl(0),
+	PWMr(1),
 	
 	// Controllers
 	driver(5),
@@ -26,12 +27,8 @@ DevBot::DevBot():
 	gyro(0),
 	accelerometer(),
 	compressor(),
-	robotDrive(PWMfl, PWMrl, PWMfr, PWMrr)
+	robotDrive(PWMl, PWMr)
 {
-	// Mecanum Boilerplate
-	robotDrive.SetInvertedMotor( RobotDrive::kFrontLeftMotor, true );
-	robotDrive.SetInvertedMotor( RobotDrive::kRearLeftMotor, true );
-	
 	// Other Assorted Setup
 	robotDrive.SetExpiration(0.3);
 	compressor.Start();
@@ -40,10 +37,13 @@ DevBot::DevBot():
 // TODO: Check if WPILib is fixed yet.
 void DevBot::UpdateMotors() {
 	// Set real motor values based off of the fake ones
-	frontRight.Set(PWMfr.Get());
-	frontLeft.Set(PWMfl.Get());
-	rearLeft.Set(PWMrl.Get());
-	rearRight.Set(PWMrr.Get());
+	frontLeft.Set(PWMl.Get());
+	middleLeft.Set(PWMl.Get());
+	rearLeft.Set(PWMl.Get());
+	
+	frontRight.Set(PWMr.Get());
+	middleRight.Set(PWMr.Get());
+	rearRight.Set(PWMr.Get());
 }
 
 START_ROBOT_CLASS(DevBot);
