@@ -42,12 +42,13 @@ DevBot::DevBot():
 // TODO: Check if WPILib is fixed yet.
 void DevBot::UpdateMotors() {
 	// Set real motor values based off of the fake ones
-	frontRight.Set(PWMr.Get());
 	frontLeft.Set(PWMl.Get());
-	rearLeft.Set(PWMl.Get());
-	rearRight.Set(PWMr.Get());
 	middleLeft.Set(PWMl.Get());
+	rearLeft.Set(PWMl.Get());
+	
+	frontRight.Set(PWMr.Get());
 	middleRight.Set(PWMr.Get());
+	rearRight.Set(PWMr.Get());
 }
 
 START_ROBOT_CLASS(DevBot);
