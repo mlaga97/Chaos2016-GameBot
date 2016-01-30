@@ -13,13 +13,13 @@ class DevBot: public IterativeRobot
 	CANTalon frontLeft;
 	CANTalon rearLeft;
 	CANTalon rearRight;
+	CANTalon middleLeft;
+	CANTalon middleRight;
 
 	// Fake Motor Controllers
 	// TODO: Check if WPILib is fixed yet.
-	TalonSRX PWMfr;
-	TalonSRX PWMfl;
-	TalonSRX PWMrl;
-	TalonSRX PWMrr;
+	TalonSRX PWMl;
+	TalonSRX PWMr;
 
 	// Controllers
 	Joystick driver;
