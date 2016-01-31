@@ -29,11 +29,6 @@ DevBot::DevBot():
 	compressor(),
 	robotDrive(PWMl, PWMr)
 {
-	// Mecanum Boilerplate
-
-	robotDrive.SetInvertedMotor( RobotDrive::kFrontLeftMotor, true );
-	robotDrive.SetInvertedMotor( RobotDrive::kRearLeftMotor, true );
-	
 	// Other Assorted Setup
 	robotDrive.SetExpiration(0.3);
 	compressor.Start();
