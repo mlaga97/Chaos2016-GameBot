@@ -9,12 +9,13 @@ class DevBot: public IterativeRobot
 {
   private:
 	// Actual Motor Controllers
-	CANTalon frontRight;
 	CANTalon frontLeft;
-	CANTalon rearLeft;
-	CANTalon rearRight;
 	CANTalon middleLeft;
+	CANTalon rearLeft;
+
+	CANTalon frontRight;
 	CANTalon middleRight;
+	CANTalon rearRight;
 
 	// Fake Motor Controllers
 	// TODO: Check if WPILib is fixed yet.
