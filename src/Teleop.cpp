@@ -14,6 +14,11 @@ void DevBot::TeleopPeriodic() {
 		-driver.GetRawAxis(4)		// Rotational movement
 	);
 
+	roller.Set
+	(
+			copilot.GetRawAxis(1)
+	);
+
 	// Set real motor values based off of the fake ones
 	UpdateMotors();
 
