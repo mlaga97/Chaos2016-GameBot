@@ -1,6 +1,7 @@
 #include <cstdint>
 #include "WPILib.h"
 #include "DevBot.h"
+#include "roller.h"
 
 void DevBot::TeleopInit() {
 	robotDrive.SetSafetyEnabled(false);	// Necessary for proper motor functioning during Teleop
@@ -14,13 +15,11 @@ void DevBot::TeleopPeriodic() {
 		-driver.GetRawAxis(4)		// Rotational movement
 	);
 
-	roller.Set
-	(
-			copilot.GetRawAxis(1)
-	);
+	roller.Set( copilot.GetRawAxis(1) );
 
-	// Set real motor values based off of the fake ones
 	UpdateMotors();
 
-	Wait(0.005); // Give the CPU some time to breathe so it doesn't explode.
+	Wait(0.005);
 }
+
+

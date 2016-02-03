@@ -1,6 +1,7 @@
 #include <cstdint>
 #include "WPILib.h"
 #include "DevBot.h"
+#include "roller.h"
 
 
 DevBot::DevBot():
@@ -22,7 +23,7 @@ DevBot::DevBot():
 	copilot(4),
 	
 	// Pseudo-Subsystems
-	roller( 13, 14, 0, 1 ),
+	roller( 13, 14, 0 ),
 
 	// Assorted In's and Out's
 	gyro(0),
@@ -45,6 +46,8 @@ void DevBot::UpdateMotors() {
 	frontRight.Set(PWMr.Get());
 	middleRight.Set(PWMr.Get());
 	rearRight.Set(PWMr.Get());
+
+	roller.Set( copilot.GetRawAxis(1) );
 
 }
 
