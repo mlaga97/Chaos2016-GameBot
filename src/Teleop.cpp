@@ -1,7 +1,7 @@
 #include <cstdint>
 #include "WPILib.h"
 #include "DevBot.h"
-#include "roller.h"
+#include "Roller.h"
 
 void DevBot::TeleopInit() {
 	robotDrive.SetSafetyEnabled(false);	// Necessary for proper motor functioning during Teleop
@@ -15,11 +15,9 @@ void DevBot::TeleopPeriodic() {
 		-driver.GetRawAxis(4)		// Rotational movement
 	);
 
-	roller.Set( copilot.GetRawAxis(1) );
-
 	UpdateMotors();
+
+	roller.Set( copilot.GetRawAxis(1) );
 
 	Wait(0.005);
 }
-
-

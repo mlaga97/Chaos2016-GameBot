@@ -1,8 +1,7 @@
 #include <cstdint>
 #include "WPILib.h"
 #include "DevBot.h"
-#include "roller.h"
-
+#include "Roller.h"
 
 DevBot::DevBot():
 	// Actual Motor Controllers
@@ -23,7 +22,7 @@ DevBot::DevBot():
 	copilot(4),
 	
 	// Pseudo-Subsystems
-	roller( 13, 14, 0 ),
+	roller(13, 14),
 
 	// Assorted In's and Out's
 	gyro(0),
