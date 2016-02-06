@@ -2,7 +2,7 @@
 #include "WPILib.h"
 #include "DevBot.h"
 #include "Roller.h"
-#include "arm.h"
+#include "Arm.h"
 
 DevBot::DevBot():
 	// Actual Motor Controllers
