@@ -9,6 +9,6 @@ Roller::Roller( int talon_id, int talon_id2 ):
 }
 
 void Roller::Set( float speed ) {
-	rollerLeft.Set( speed );
+	rollerLeft.Set( -speed );
 	rollerRight.Set( speed );
 }
