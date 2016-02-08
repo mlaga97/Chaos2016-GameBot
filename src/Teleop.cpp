@@ -3,18 +3,33 @@
 #include "DevBot.h"
 #include "Roller.h"
 #include "Arm.h"
+#include "CVClient.h"
 
 void DevBot::TeleopInit() {
 	robotDrive.SetSafetyEnabled(false);	// Necessary for proper motor functioning during Teleop
 }
 
 void DevBot::TeleopPeriodic() {
-	// Drive
-	robotDrive.ArcadeDrive
-	(
-		-driver.GetRawAxis(1),		// Forward movement
-		-driver.GetRawAxis(4)		// Rotational movement
-	);
+
+	// Check "Start" Button For Autoshoot
+	if(driver.GetRawButton(8)) {
+		Target target = cvClient.getData();
+
+		float rotation_speed = -0.001*target.x;
+
+		// Auto Aim
+		robotDrive.ArcadeDrive(
+			0.0,			// Forward movement
+			rotation_speed	// Rotational movement
+		);
+	} else {
+		// Drive
+		robotDrive.ArcadeDrive
+		(
+			-driver.GetRawAxis(1),		// Forward movement
+			-driver.GetRawAxis(4)		// Rotational movement
+		);
+	}
 
 	UpdateMotors();
 

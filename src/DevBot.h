@@ -5,6 +5,7 @@
 #include "WPILib.h"
 #include "Roller.h"
 #include "Arm.h"
+#include "CVClient.h"
 
 // Main Robot Class
 class DevBot: public IterativeRobot

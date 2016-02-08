@@ -3,6 +3,7 @@
 #include "DevBot.h"
 #include "Roller.h"
 #include "Arm.h"
+#include "CVClient.h"
 
 DevBot::DevBot():
 	// Actual Motor Controllers
