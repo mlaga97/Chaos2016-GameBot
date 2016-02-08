@@ -1,6 +1,8 @@
 #include <cstdint>
 #include "WPILib.h"
 #include "DevBot.h"
+#include "Roller.h"
+#include "Arm.h"
 
 DevBot::DevBot():
 	// Actual Motor Controllers
@@ -21,8 +23,9 @@ DevBot::DevBot():
 	copilot(4),
 	
 	// Pseudo-Subsystems
-	// None yet!
-	
+	roller(13, 14),
+	arm(15),
+
 	// Assorted In's and Out's
 	gyro(0),
 	accelerometer(),
@@ -44,6 +47,10 @@ void DevBot::UpdateMotors() {
 	frontRight.Set(PWMr.Get());
 	middleRight.Set(PWMr.Get());
 	rearRight.Set(PWMr.Get());
+
+	roller.Set( copilot.GetRawAxis(1) );
+	arm.Set(copilot.GetRawAxis(5));
+
 }
 
 START_ROBOT_CLASS(DevBot);

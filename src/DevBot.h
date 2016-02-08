@@ -3,6 +3,8 @@
 
 #include <cstdint>
 #include "WPILib.h"
+#include "Roller.h"
+#include "Arm.h"
 
 // Main Robot Class
 class DevBot: public IterativeRobot
@@ -27,8 +29,9 @@ class DevBot: public IterativeRobot
 	Joystick copilot;
 	
 	// Pseudo-Subsystems
-	// None yet!
-	
+	Roller roller;
+	Arm arm;
+
 	// Assorted In's and Out's
 	AnalogGyro gyro;
 	BuiltInAccelerometer accelerometer;
