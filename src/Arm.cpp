@@ -4,7 +4,7 @@
  *  Created on: Feb 5, 2016
  *      Author: Thomas Travis
  */
-#include "WPIlib.h"
+#include "WPILib.h"
 #include <Arm.h>
 
 Arm::Arm(int arm_id):
@@ -16,5 +16,3 @@ Arm::Arm(int arm_id):
 void Arm::Set( float speed ) {
 	armMotor.Set( speed );
 }
-
-
