@@ -12,7 +12,7 @@ void DevBot::TeleopPeriodic() {
 	// Drive
 	robotDrive.ArcadeDrive
 	(
-		driver.GetRawAxis(1),		// Forward movement
+		-driver.GetRawAxis(1),		// Forward movement
 		-driver.GetRawAxis(4)		// Rotational movement
 	);
 
