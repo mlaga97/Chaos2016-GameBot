@@ -31,6 +31,7 @@ class DevBot: public IterativeRobot
 	// Pseudo-Subsystems
 	Roller roller;
 	Arm arm;
+	CVClient cvClient;
 
 	// Assorted In's and Out's
 	AnalogGyro gyro;
