@@ -3,10 +3,11 @@
 
 #include <netdb.h>
 
-struct Target {
-	int x;
-	int y;
-	int error;
+struct CVRequest {
+	double forward;
+	double rotation;
+	double roller;
+	int local_error;
 };
 
 class CVClient
@@ -15,12 +16,14 @@ class CVClient
 	int sockfd, portno, n;
 	struct sockaddr_in serv_addr;
 	struct hostent *server;
-	char buffer[32];
+	char buffer[256];
 	char buffer2[32];
 
   public:
 	int initialize();
-	Target getData();
+	CVRequest autoAim();
+	CVRequest autoFire();
+	CVRequest autoBall();
 };
 
 #endif /*CVCLIENT_H*/

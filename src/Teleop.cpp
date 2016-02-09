@@ -12,25 +12,18 @@ void DevBot::TeleopInit() {
 
 void DevBot::TeleopPeriodic() {
 
-	// Check "Start" Button For Autoshoot
+	// Press "Start" Button to Autofire
 	if(driver.GetRawButton(8)) {
-		Target target = cvClient.getData();
+		CVRequest c = cvClient.autoFire();
 
-		float rotation_speed = -0.01*target.x;
-
-		// Threshold
-		if(rotation_speed > 0.5)
-			rotation_speed = 0.5;
-		else if(rotation_speed < -0.5)
-			rotation_speed = -0.5;
-
-		std::cout << "ROTATION_SPEED: " << rotation_speed << "\n";
-
-		// Auto Aim
 		robotDrive.ArcadeDrive(
-			0.0,			// Forward movement
-			rotation_speed	// Rotational movement
+			c.forward,
+			c.rotation
 		);
+
+		roller.Set( c.roller );
+
+	// Manual Control
 	} else {
 		// Drive
 		robotDrive.ArcadeDrive
@@ -38,11 +31,12 @@ void DevBot::TeleopPeriodic() {
 			-driver.GetRawAxis(1),		// Forward movement
 			-driver.GetRawAxis(4)		// Rotational movement
 		);
+
+		roller.Set( copilot.GetRawAxis(1) );
 	}
 
 	UpdateMotors();
 
-	roller.Set( copilot.GetRawAxis(1) );
 	arm.Set(copilot.GetRawAxis(5));
 
 	Wait(0.005);
