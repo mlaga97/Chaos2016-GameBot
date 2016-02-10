@@ -52,7 +52,7 @@ int CVClient::initialize() {
 	}
 
 	// Get Host By Name
-	server = gethostbyname("localhost");
+	server = gethostbyname("10.14.21.15");
 	if (server == NULL) {
 		std::cout << "No such host!\n";
 		return -2;
@@ -74,4 +74,5 @@ int CVClient::initialize() {
 		return -3;
 	}
 	
+	return 0;
 }

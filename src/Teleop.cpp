@@ -4,6 +4,7 @@
 #include "Roller.h"
 #include "Arm.h"
 #include "CVClient.h"
+#include <iostream>
 
 void DevBot::TeleopInit() {
 	robotDrive.SetSafetyEnabled(false);	// Necessary for proper motor functioning during Teleop
@@ -15,7 +16,15 @@ void DevBot::TeleopPeriodic() {
 	if(driver.GetRawButton(8)) {
 		Target target = cvClient.getData();
 
-		float rotation_speed = -0.001*target.x;
+		float rotation_speed = -0.01*target.x;
+
+		// Threshold
+		if(rotation_speed > 0.5)
+			rotation_speed = 0.5;
+		else if(rotation_speed < -0.5)
+			rotation_speed = -0.5;
+
+		std::cout << "ROTATION_SPEED: " << rotation_speed << "\n";
 
 		// Auto Aim
 		robotDrive.ArcadeDrive(
