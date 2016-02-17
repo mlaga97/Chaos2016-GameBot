@@ -147,9 +147,10 @@ int CVClient::initialize() {
 	}
 
 	// Get Host By Name
-	server = gethostbyname("lucs-NE56R.local");
+	server = gethostbyname("visionserver.local");
 	if (server == NULL) {
-		std::cout << "No such host!\n";
+		std::cout << "No such host!\nTrying backup!\n";
+		server = gethostbyname("lucs-NE56R.local")
 		return -2;
 	}
 	
