@@ -3,6 +3,7 @@
 #include "DevBot.h"
 #include "Roller.h"
 #include "Arm.h"
+#include "CVClient.h"
 
 DevBot::DevBot():
 	// Actual Motor Controllers
@@ -25,6 +26,7 @@ DevBot::DevBot():
 	// Pseudo-Subsystems
 	roller(13, 14),
 	arm(15),
+	cvClient(),
 
 	// Assorted In's and Out's
 	gyro(0),
@@ -32,6 +34,9 @@ DevBot::DevBot():
 	compressor(),
 	robotDrive(PWMl, PWMr)
 {
+	// Computer Vision Setup
+	cvClient.initialize();
+
 	// Other Assorted Setup
 	robotDrive.SetExpiration(0.3);
 	compressor.Start();
