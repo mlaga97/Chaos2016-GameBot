@@ -2,28 +2,75 @@
 #include <cmath>
 #include "WPILib.h"
 #include "DevBot.h"
-#include <iostream>
 
 void DevBot::AutonomousInit() {
+	// Autonomous Modes
+	//	0 = Do nothing					(0.0s)
+	//	1 = Move forward to defense		(2.5s)
+	//	2 = Breach defense				(7.0s)
+	//	3 = Turn towards goal			(9.0s)
+	//  4 = Move towards goal			(11.0s)
+	//	5 = Shoot at goal				(13.0s)
+	//	6 = Enable vision				(15.0s)
+	int AutoMode = 6;
+
 	// Setup
 	robotDrive.SetSafetyEnabled(false);
-	gyro.Reset();
-	Timer timer;
 
-	// Reset Timer for loop
-	timer.Reset();
-	timer.Start();
-
-	// Drive straight for 2 seconds
-	while ( timer.Get() < 2 ) {
-		robotDrive.ArcadeDrive(-0.20, gyro.GetAngle() * 0.1);
-		UpdateMotors();
-		Wait(0.005);
+	// Move Forward
+	if(1 <= AutoMode) {
+		Forward(0.5, 2.5);
 	}
 
-	// Stop
-	robotDrive.ArcadeDrive(0.0, 0.0);
-	UpdateMotors();
+	// Breach Defense
+	if(2 <= AutoMode) {
+		Forward(0.6, 0.5);
+		Forward(0.5, 4);
+	}
+
+	// Turn towards goal
+	if(3 <= AutoMode) {
+		Turn(0.5, -60);
+	}
+
+	// Move towards goal
+	if(4 <= AutoMode) {
+		Forward(0.5, 2);
+	}
+
+	if(6 <= AutoMode) {
+		// Initialize Timer
+		Timer timer;
+		timer.Reset();
+		timer.Start();
+		CVRequest c;
+
+		// Move straight, changing angle to adjust for drift
+		while( timer.Get() <= 2 ) {
+			c = cvClient.autoFire();
+
+			robotDrive.ArcadeDrive(
+				c.forward,
+				c.rotation
+			);
+
+			roller.Set( c.roller );
+
+			UpdateMotors();
+
+			Wait(0.01);
+		}
+
+		// Stop
+		robotDrive.ArcadeDrive(0.0, 0.0);
+		UpdateMotors();
+	}
+
+	if(5 <= AutoMode) {
+		roller.Set(-1);
+		Wait(1);
+		roller.Set(0);
+	}
 }
 
 void DevBot::AutonomousPeriodic() {
@@ -31,8 +78,8 @@ void DevBot::AutonomousPeriodic() {
 }
 
 void DevBot::Turn( float absSpeed, float targetAngle ) {
+	float angle;
 	float offset;
-	float absOffset;
 	float speed;
 
 	// Reset the gyro to 0 degrees
@@ -40,25 +87,27 @@ void DevBot::Turn( float absSpeed, float targetAngle ) {
 	
 	do {
 		// Find the offsets for the rest of the math
-		offset = gyro.GetAngle() - targetAngle;
-		absOffset = std::abs(offset);
+		angle = gyro.GetAngle();
+		offset = angle - targetAngle;
 		
 		// Calculate output speed
 		if(offset > 0)
-			speed = absSpeed;
+			speed = -absSpeed;
 		else
-			speed = -1 * absSpeed;
+			speed = absSpeed;
 
 		// Turn
 		robotDrive.ArcadeDrive(0.0, speed);
+		UpdateMotors();
 
 		// Keep CPU from catching fire and network from exploding in a fireball of packets.
 		Wait(0.005);
 
-	} while( absOffset > 1 ); // Repeat until target is reached.
+	} while( abs(offset) > 1 ); // Repeat until target is reached.
 
 	// Leave everything as we found it
 	robotDrive.ArcadeDrive(0.0, 0.0);
+	UpdateMotors();
 }
 
 void DevBot::Backward( float Speed, float Time ) {
@@ -73,11 +122,13 @@ void DevBot::Backward( float Speed, float Time ) {
 	// Move straight, changing angle to adjust for drift
 	while ( timer.Get() <= Time ) {
 		robotDrive.ArcadeDrive(-Speed, gyro.GetAngle() * 0.1 );
+		UpdateMotors();
 		Wait(0.005);
 	}
 	
 	// Leave everything as we found it
 	robotDrive.ArcadeDrive(0.0, 0.0);
+	UpdateMotors();
 	timer.Stop();
 }
 
@@ -93,10 +144,12 @@ void DevBot::Forward( float Speed, float Time ) {
 	// Move straight, changing angle to adjust for drift
 	while ( timer.Get() <= Time ) {
 		robotDrive.ArcadeDrive(Speed, -gyro.GetAngle() * 0.1 );
+		UpdateMotors();
 		Wait(0.005);
 	}
 	
 	// Leave everything as we found it
 	robotDrive.ArcadeDrive(0.0, 0.0);
+	UpdateMotors();
 	timer.Stop();
 }

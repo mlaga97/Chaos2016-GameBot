@@ -34,7 +34,12 @@ DevBot::DevBot():
 	compressor(),
 	robotDrive(PWMl, PWMr)
 {
+	// Wait for vision server to come up
+	// TODO: Avoid this like the plague.
+	Wait(60);
+
 	// Computer Vision Setup
+	// TODO: Maybe do this somewhere else.
 	cvClient.initialize();
 
 	// Other Assorted Setup
