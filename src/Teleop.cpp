@@ -14,14 +14,13 @@ void DevBot::TeleopPeriodic() {
 
 	// Press "Start" Button to Autofire
 	if(driver.GetRawButton(8)) {
-		CVRequest c = cvClient.autoFire();
+		CVRequest c = cvClient.autoAim();
 
-		robotDrive.ArcadeDrive(
-			c.forward,
-			c.rotation
-		);
-
-		roller.Set( c.roller );
+		/* TODO: Re-implement
+		 * My idea is to use get an initial angle when the button is
+		 * pressed and hold onto it until the the button is released
+		 * using a flag variable so as to remain non-blocking.
+		 */
 
 	// Manual Control
 	} else {

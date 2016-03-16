@@ -4,9 +4,7 @@
 #include <netdb.h>
 
 struct CVRequest {
-	double forward;
-	double rotation;
-	double roller;
+	double angle_offset;
 	int local_error;
 };
 
@@ -22,8 +20,7 @@ class CVClient
   public:
 	int initialize();
 	CVRequest autoAim();
-	CVRequest autoFire();
-	CVRequest autoBall();
+	CVRequest customPayload(char* payload, int length);
 };
 
 #endif /*CVCLIENT_H*/

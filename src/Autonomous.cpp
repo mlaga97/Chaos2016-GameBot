@@ -37,35 +37,14 @@ void DevBot::AutonomousInit() {
 	if(4 <= AutoMode) {
 		Forward(0.5, 2);
 	}
-
+	
+	// Use computer vision to Aim
 	if(6 <= AutoMode) {
-		// Initialize Timer
-		Timer timer;
-		timer.Reset();
-		timer.Start();
-		CVRequest c;
-
-		// Move straight, changing angle to adjust for drift
-		while( timer.Get() <= 2 ) {
-			c = cvClient.autoFire();
-
-			robotDrive.ArcadeDrive(
-				c.forward,
-				c.rotation
-			);
-
-			roller.Set( c.roller );
-
-			UpdateMotors();
-
-			Wait(0.01);
-		}
-
-		// Stop
-		robotDrive.ArcadeDrive(0.0, 0.0);
-		UpdateMotors();
+		c = cvClient.autoAim();
+		Turn(0.5, c.angle_offset);
 	}
-
+	
+	// Shoot the ball
 	if(5 <= AutoMode) {
 		roller.Set(-1);
 		Wait(1);

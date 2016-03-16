@@ -42,18 +42,16 @@ CVRequest CVClient::autoAim() {
 	values[count] = atof(buffer2);
 	
 	// Put Values Where They Belong
-	target.forward = values[0];
-	target.rotation = values[1];
-	target.roller = values[2];
+	target.angle_offset = values[0];
 
 	return target;
 }
 
-CVRequest CVClient::autoFire() {
+CVRequest CVClient::customPayload(char* payload, int length) {
 	CVRequest target = {0,0,0};
 
 	// Write to Server
-	n = write(sockfd,"AUTOFIRE\n",9);
+	n = write(sockfd,payload,length);
 	if (n < 0) {
 		std::cout << "Write error!\n";
 		target.local_error = -1;
@@ -86,53 +84,7 @@ CVRequest CVClient::autoFire() {
 	values[count] = atof(buffer2);
 
 	// Put Values Where They Belong
-	target.forward = values[0];
-	target.rotation = values[1];
-	target.roller = values[2];
-
-	return target;
-}
-
-CVRequest CVClient::autoBall() {
-	CVRequest target = {0,0,0};
-
-	// Write to Server
-	n = write(sockfd,"AUTOBALL\n",9);
-	if (n < 0) {
-		std::cout << "Write error!\n";
-		target.local_error = -1;
-		return target;
-	}
-
-	// Read from Server
-	bzero(buffer,256);
-	n = read(sockfd,buffer,255);
-	if (n < 0) {
-		std::cout << "Read error!\n";
-		target.local_error = -2;
-		return target;
-	}
-
-	// Slightly Less Evil String Splitting Solution
-	int offset = 0;
-	int count = 0;
-	double values[10];
-	for(n = 0; buffer[n] != '\00'; n++) {
-		if(buffer[n]==' ') {
-			values[count] = atof(buffer2);
-			bzero(buffer2,32);
-			offset = n+1;
-			count++;
-		} else {
-			buffer2[n-offset] = buffer[n];
-		}
-	}
-	values[count] = atof(buffer2);
-
-	// Put Values Where They Belong
-	target.forward = values[0];
-	target.rotation = values[1];
-	target.roller = values[2];
+	target.angle_offset = values[0];
 
 	return target;
 }
@@ -149,8 +101,7 @@ int CVClient::initialize() {
 	// Get Host By Name
 	server = gethostbyname("visionserver.local");
 	if (server == NULL) {
-		std::cout << "No such host!\nTrying backup!\n";
-		server = gethostbyname("lucs-NE56R.local")
+		std::cout << "No such host!\n";
 		return -2;
 	}
 	
