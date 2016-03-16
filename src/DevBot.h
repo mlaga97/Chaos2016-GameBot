@@ -39,6 +39,14 @@ class DevBot: public IterativeRobot
 	BuiltInAccelerometer accelerometer;
 	Compressor compressor;
 	RobotDrive robotDrive;
+
+	// Autonomous Switch Inputs
+	DigitalInput auto0;
+	DigitalInput auto1;
+	DigitalInput auto2;
+	DigitalInput auto3;
+	DigitalInput auto4;
+	DigitalInput auto5;
   public:
 	// Constructor Method
 	DevBot();
@@ -54,6 +62,7 @@ class DevBot: public IterativeRobot
 	void Forward( float Speed, float Time );
 	void Backward( float Speed, float Time );
 	void Turn( float absSpeed, float targetAngle );
+	int AutoSwitch();
 };
 
 #endif /* SRC_DEVBOT_H_ */

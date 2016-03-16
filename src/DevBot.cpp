@@ -32,7 +32,15 @@ DevBot::DevBot():
 	gyro(0),
 	accelerometer(),
 	compressor(),
-	robotDrive(PWMl, PWMr)
+	robotDrive(PWMl, PWMr),
+
+	// Autonomous Switch Inputs
+	auto0(0),
+	auto1(1),
+	auto2(2),
+	auto3(3),
+	auto4(4),
+	auto5(5)
 {
 	// Wait for vision server to come up
 	// TODO: Avoid this like the plague.
