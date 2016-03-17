@@ -3,7 +3,7 @@
 #include "DevBot.h"
 #include "Roller.h"
 #include "Arm.h"
-#include "CVClient.h"
+//#include "CVClient.h"
 #include <iostream>
 
 void DevBot::TeleopInit() {
@@ -14,7 +14,7 @@ void DevBot::TeleopPeriodic() {
 
 	// Press "Start" Button to Autofire
 	if(driver.GetRawButton(8)) {
-		CVRequest c = cvClient.autoAim();
+		//CVRequest c = cvClient.autoAim();
 
 		/* TODO: Re-implement
 		 * My idea is to use get an initial angle when the button is

@@ -2,7 +2,7 @@
 #include <cmath>
 #include "WPILib.h"
 #include "DevBot.h"
-#include "CVClient.h"
+//#include "CVClient.h"
 
 void DevBot::AutonomousInit() {
 	// Autonomous Modes
@@ -79,10 +79,10 @@ void DevBot::AutonomousInit() {
 	}
 
 	// Use computer vision to Aim
-	if(7 <= autoMode) {
-		CVRequest c = cvClient.autoAim();
-		Turn(0.5, c.angle_offset);
-	}
+	//if(7 <= autoMode) {
+	//	CVRequest c = cvClient.autoAim();
+	//	Turn(0.5, c.angle_offset);
+	//}
 
 	// Shoot the ball
 	if(6 <= autoMode) {
