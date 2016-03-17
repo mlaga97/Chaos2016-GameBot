@@ -6,7 +6,7 @@
 #include "CVClient.h"
 
 CVRequest CVClient::autoAim() {
-	CVRequest target = {0,0,0};
+	CVRequest target = {0};
 
 	// Write to Server
 	n = write(sockfd,"AUTO_AIM\n",9);
@@ -48,7 +48,7 @@ CVRequest CVClient::autoAim() {
 }
 
 CVRequest CVClient::customPayload(char* payload, int length) {
-	CVRequest target = {0,0,0};
+	CVRequest target = {0};
 
 	// Write to Server
 	n = write(sockfd,payload,length);
