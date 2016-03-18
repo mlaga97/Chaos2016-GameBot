@@ -123,6 +123,11 @@ void DevBot::Turn( float absSpeed, float targetAngle ) {
 
 	// Reset the gyro to 0 degrees
 	gyro.Reset();
+
+	// Initialize Timer
+	Timer timer;
+	timer.Reset();
+	timer.Start();
 	
 	do {
 		// Find the offsets for the rest of the math
@@ -142,7 +147,7 @@ void DevBot::Turn( float absSpeed, float targetAngle ) {
 		// Keep CPU from catching fire and network from exploding in a fireball of packets.
 		Wait(0.005);
 
-	} while( abs(offset) > 1 ); // Repeat until target is reached.
+	} while( abs(offset) > 1 && timer.Get() < 5 ); // Repeat until target is reached or we timeout.
 
 	// Leave everything as we found it
 	robotDrive.ArcadeDrive(0.0, 0.0);
