@@ -26,7 +26,7 @@ void DevBot::AutonomousInit() {
 
 	// Breach Defense (Slightly Increase Speed)
 	if(2 <= autoMode) {
-		Forward(0.6, 0.5);
+		Forward(0.75, 0.5);
 	}
 
 	// Continue Forward
