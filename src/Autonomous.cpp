@@ -14,41 +14,7 @@ void DevBot::AutonomousInit() {
 	//  5 = Move towards goal			(+2.0s 11.0s)
 	//	6 = Shoot at goal				(+2.0s 13.0s)
 	//	7 = Enable vision				(+2.0s 15.0s)
-
-	int autoMode;
-	int switchPosition = AutoSwitch();
-
-	switch( switchPosition ) {
-		case 0:
-			// Do nothing (any)
-			autoMode = 0;
-			break;
-
-		case 1:
-			// Move to defense (any)
-			autoMode = 1;
-			break;
-
-		case 2:
-			// Breach defense (most)
-			autoMode = 2;
-			break;
-
-		case 3:
-			// Breach defense + Move forward (most)
-			autoMode = 3;
-			break;
-
-		case 4:
-			// Move to low goal (low-bar)
-			autoMode = 5;
-			break;
-
-		case 5:
-			// Shoot into low goal (low-bar)
-			autoMode = 7;
-			break;
-	}
+	int autoMode = 3;
 
 	// Setup
 	robotDrive.SetSafetyEnabled(false);
@@ -94,26 +60,6 @@ void DevBot::AutonomousInit() {
 
 void DevBot::AutonomousPeriodic() {
 	Wait(0.005);
-}
-
-// Get Switch Position
-int DevBot::AutoSwitch() {
-	int switchPosition;
-
-	if( !auto5.Get() )
-		switchPosition = 5;
-	else if( !auto4.Get() )
-		switchPosition = 4;
-	else if( !auto3.Get() )
-		switchPosition = 3;
-	else if( !auto2.Get() )
-		switchPosition = 2;
-	else if( !auto1.Get() )
-		switchPosition = 1;
-	else
-		switchPosition = 0;
-
-	return switchPosition;
 }
 
 void DevBot::Turn( float absSpeed, float targetAngle ) {
