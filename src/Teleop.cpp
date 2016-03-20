@@ -31,7 +31,7 @@ void DevBot::TeleopPeriodic() {
 			-driver.GetRawAxis(4)		// Rotational movement
 		);
 
-		roller.Set( copilot.GetRawAxis(1) );
+		roller.Set( copilot.GetRawAxis(1) + 0.1 );
 	}
 
 	UpdateMotors();

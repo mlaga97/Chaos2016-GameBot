@@ -19,19 +19,22 @@ void DevBot::AutonomousInit() {
 	// Setup
 	robotDrive.SetSafetyEnabled(false);
 
+	// Set roller ball retention
+	roller.Set(1.0);
+
 	// Move Forward
 	if(1 <= autoMode) {
-		Forward(0.5, 2.5);
+		Forward(0.75, 1.8);
 	}
 
 	// Breach Defense (Slightly Increase Speed)
 	if(2 <= autoMode) {
-		Forward(0.85, 0.5);
+		Forward(0.90, 1.5);
 	}
 
 	// Continue Forward
 	if(3 <= autoMode) {
-		Forward(0.5, 4);
+		Forward(0.75, 1.0);
 	}
 
 	// Turn towards goal
@@ -134,6 +137,7 @@ void DevBot::Forward( float Speed, float Time ) {
 	// Move straight, changing angle to adjust for drift
 	while ( timer.Get() <= Time ) {
 		robotDrive.ArcadeDrive(Speed, -gyro.GetAngle() * 0.1 );
+		roller.Set(0.1);
 		UpdateMotors();
 		Wait(0.005);
 	}
