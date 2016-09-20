@@ -3,7 +3,7 @@
 #include "DevBot.h"
 #include "Roller.h"
 #include "Arm.h"
-#include "CVClient.h"
+//#include "CVClient.h"
 
 DevBot::DevBot():
 	// Actual Motor Controllers
@@ -26,7 +26,7 @@ DevBot::DevBot():
 	// Pseudo-Subsystems
 	roller(13, 14),
 	arm(15),
-	cvClient(),
+	//cvClient(),
 
 	// Assorted In's and Out's
 	gyro(0),
@@ -44,11 +44,11 @@ DevBot::DevBot():
 {
 	// Wait for vision server to come up
 	// TODO: Avoid this like the plague.
-	Wait(60);
+	//Wait(60);
 
 	// Computer Vision Setup
 	// TODO: Maybe do this somewhere else.
-	cvClient.initialize();
+	//cvClient.initialize();
 
 	// Other Assorted Setup
 	robotDrive.SetExpiration(0.3);
