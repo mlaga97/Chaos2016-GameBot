@@ -13,7 +13,7 @@ void DevBot::TeleopInit() {
 void DevBot::TeleopPeriodic() {
 
 	// Press "Start" Button to Autofire
-	if(driver.GetRawButton(8)) {
+	if(driver.GetRawButton(6)) {
 		//CVRequest c = cvClient.autoAim();
 
 		/* TODO: Re-implement
@@ -27,8 +27,8 @@ void DevBot::TeleopPeriodic() {
 		// Drive
 		robotDrive.ArcadeDrive
 		(
-			-driver.GetRawAxis(1),		// Forward movement
-			-driver.GetRawAxis(4)		// Rotational movement
+			-driver.GetRawAxis(2),		// Forward movement
+			-driver.GetRawAxis(5)		// Rotational movement
 		);
 
 		roller.Set( copilot.GetRawAxis(1) + 0.1 );
